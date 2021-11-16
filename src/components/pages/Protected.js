@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../providers/auth-provider";
 
 function Protected() {
-  const { auth, token } = useContext(AuthContext);
+  const { auth, token, setToken } = useContext(AuthContext);
   useEffect(() => {
     const makeAuthCall = async () => {
       try {
@@ -13,11 +13,18 @@ function Protected() {
       }
     };
     makeAuthCall();
-  }, [auth, token]);
+  }, [auth, token, setToken]);
+
+  const handleButton = async () => {
+    await fetch("/.netlify/functions/checkjwt", { method: "post" });
+  };
   return (
     <div>
       {token ? (
-        <h1>You are in protected page</h1>
+        <div>
+          <button onClick={() => handleButton()}>Click Me</button>
+          <h1>You are in protected page</h1>
+        </div>
       ) : (
         <Redirect to="/unauthorized" />
       )}

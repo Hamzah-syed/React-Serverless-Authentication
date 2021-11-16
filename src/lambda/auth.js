@@ -15,6 +15,7 @@ export async function handler(event) {
 
   try {
     const verified = jwt.verify(cookies.jwt, process.env.REACT_APP_JWT_TOKEN);
+    console.log(verified);
     if (!verified) {
       return {
         statusCode: 401,

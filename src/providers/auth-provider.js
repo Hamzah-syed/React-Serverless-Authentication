@@ -23,7 +23,6 @@ const AuthProvider = (props) => {
     console.log("server response", response.auth);
     setToken(response.auth);
     console.log("context variable", token);
-    //console.log("isvalidtoken", response.auth);
   };
   // handle error message
   const handleError = (response) => {
@@ -54,6 +53,7 @@ const AuthProvider = (props) => {
         login,
         logout,
         auth,
+        setToken,
       }}
     >
       {props.children}
